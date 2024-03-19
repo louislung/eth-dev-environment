@@ -1,0 +1,18 @@
+node_modules
+.env
+yarn.lock
+
+# Hardhat files
+/cache
+/artifacts
+
+# TypeChain files
+/typechain
+/typechain-types
+
+# solidity-coverage files
+/coverage
+/coverage.json
+
+# Hardhat ignition files
+/ignition/deployments
