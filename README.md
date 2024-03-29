@@ -31,5 +31,18 @@ Learning:
 - by default, running hardhat uses the "hardhat" network, unless one specify --network, or set `defaultNetwork` in `hardhat.config.js`
 - [for general network config](https://hardhat.org/hardhat-runner/docs/config#networks-configuration)  
   [for hardhat network config](https://hardhat.org/hardhat-network/docs/reference#config) e.g. forking is only available in hardhat
-- `npx hardhat console`, some useful object: `process`, `config`, `ethers`, `console.log(await ethers.getSigners()).`, [Object.keys(require.cache);](https://stackoverflow.com/questions/9791925/list-of-currently-loaded-node-js-modules)
-- 
+- `npx hardhat console` / `npx hardhat console --network localhost`, some useful object: `process`, `config`, `ethers`, `console.log(await ethers.getSigners()).`, [Object.keys(require.cache);](https://stackoverflow.com/questions/9791925/list-of-currently-loaded-node-js-modules)
+- if start a hardhat node using `npx hardhat node`, can deploy contract by `hh ignition deploy ./ignition/modules/Token.ts --network localhost`  
+  if `npx hardhat node --port 12345`, then need to set `networks: {abc: {url: http://0.0.0.0:12345}}` in `hardhat.config.ts` and deploy by `hh ignition deploy ./ignition/modules/Token.ts --network abc`  
+  this is because `localhost` is defaulted to `http://127.0.0.1:8545` only
+- for deployment using hardhat ignition module check `ignition/modules/Token.ts`  
+  for deployment using ethers check `scripts/deploy.ts`, deploy by `hh run --network localhost scripts/deploy.ts`
+- `create2` contract deployment may fail (result in empty address) if sth wrong when running constructor, e.g.  
+  ```
+  contract DummyTransfer {
+      constructor() {
+        // this code will fail if msg.sender doesnt has a fallback function
+        payable(msg.sender).transfer(address(this).balance);
+      }
+  }
+  ```
