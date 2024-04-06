@@ -9,7 +9,7 @@
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.
 	// "forwardPorts": [],
 	// Use 'postCreateCommand' to run commands after the container is created.
-	"postCreateCommand": "yarn add --dev hardhat && npm install --global hardhat-shorthand",
+	"postCreateCommand": "sudo apt-get update && sudo apt-get install expect -y && yarn add --dev hardhat && npm install --global hardhat-shorthand && ./install_hh.exp && exec bash",
 	// Configure tool-specific properties.
 	"customizations": {
 		"vscode": {
@@ -24,6 +24,9 @@
 	"remoteUser": "root",
 	// https://github.com/microsoft/vscode-remote-release/issues/620
 	"mounts": [
-		"source=node_modules,target=${containerWorkspaceFolder}/node_modules,type=volume"
-	]
+		"source=${localWorkspaceFolderBasename}_node_modules,target=${containerWorkspaceFolder}/node_modules,type=volume"
+	],
+	"containerEnv": {
+		"SHELL": "/bin/bash"
+	}
 }

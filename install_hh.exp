@@ -1,0 +1,13 @@
+#!/usr/bin/expect -f
+
+spawn hardhat-completion install
+
+expect "Which Shell do you use?" {
+    send "bash\r"
+}
+
+expect "We will install completion to ~/.bashrc, is it ok ?" {
+    send "y\r"
+}
+
+expect eof
