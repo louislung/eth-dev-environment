@@ -47,8 +47,19 @@ Learning:
   }
   ```
 - `hh test --config hardhat-nofork.config.ts` allow to use different hardhat config file
-- to debug:
+- To debug:
   1. run `hh node`
   2. run `hh console --network locathost`
   3. set breakpoint in e.g. `test/SpaceBank.ts` and debug `hh test test/SpaceBank.ts --network localhost`
   4. start debugging in console at #2, e.g. `const token=await (await hre.ethers.getContractFactory("SpaceToken")).attach("0x5fbdb2315678afecb367f032d93f642f64180aa3");`
+- Flatten contract by `hh flatten contracts/SpaceBank.sol > contracts/SpaceBank_flatten.sol`
+- In `hardhat.config.tf`, define `networks: {hardhat: {forking: {url: ``https://eth-sepolia.g.alchemy.com/v2/${ALCHEMY_API_KEY}``,blockNumber:<X>}}}`  
+  Set blockNumber = 5646103, then run `hh node`, `hh console --network localhost` and run below code
+  ```
+  const [owner, addr1, addr2] = await hre.ethers.getSigners();
+  const counter=await (await hre.ethers.getContractFactory("Counter")).attach("0x3146C05647dD5c67b55336183b41e393D097f2E8");
+  await counter.getCurrent();
+  ```
+  Output will be 0n
+  Now set blockNumber = 5646657, then run the same commands, output will be 1n
+  Because there is a [transaction](https://sepolia.etherscan.io/tx/0xce8e033907a09e85cc6da790514fa1304a63168b34d644993c27ed85ff2d18ea) increased the counter

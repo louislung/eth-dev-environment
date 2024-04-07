@@ -14,8 +14,9 @@ const config: HardhatUserConfig = {
     },
     hardhat: {
       forking: {
-        url: `https://eth-mainnet.g.alchemy.com/v2/${ALCHEMY_API_KEY}`,
-        blockNumber: 14390000
+        url: `https://eth-sepolia.g.alchemy.com/v2/${ALCHEMY_API_KEY}`,
+        // blockNumber: 5646103 // Counter.sol (0x3146C05647dD5c67b55336183b41e393D097f2E8) created at block 564102
+        blockNumber: 5646657 // Counter.sol counter increased at 5646656        
       }
     }
   }
