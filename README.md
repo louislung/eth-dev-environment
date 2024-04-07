@@ -46,3 +46,9 @@ Learning:
       }
   }
   ```
+- `hh test --config hardhat-nofork.config.ts` allow to use different hardhat config file
+- to debug:
+  1. run `hh node`
+  2. run `hh console --network locathost`
+  3. set breakpoint in e.g. `test/SpaceBank.ts` and debug `hh test test/SpaceBank.ts --network localhost`
+  4. start debugging in console at #2, e.g. `const token=await (await hre.ethers.getContractFactory("SpaceToken")).attach("0x5fbdb2315678afecb367f032d93f642f64180aa3");`
