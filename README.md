@@ -50,8 +50,8 @@ Learning:
 - To debug:
   1. run `hh node`
   2. run `hh console --network locathost`
-  3. set breakpoint in e.g. `test/SpaceBank.ts` and debug `hh test test/SpaceBank.ts --network localhost`
-  4. start debugging in console at #2, e.g. `const token=await (await hre.ethers.getContractFactory("SpaceToken")).attach("0x5fbdb2315678afecb367f032d93f642f64180aa3");`
+  3. set vscode breakpoint in a test script e.g. `test/SpaceBank.ts`. Then run the test with debug mode `hh test test/SpaceBank.ts --network localhost` (note you could specifiy the test in `package.json` and trigger debug mode there)
+  4. the test script will pause at the breakpoint and you'd start debugging in console at #2, e.g. `const token=await (await hre.ethers.getContractFactory("SpaceToken")).attach("0x5fbdb2315678afecb367f032d93f642f64180aa3");`, you can now play with this token contract in console
 - Flatten contract by `hh flatten contracts/SpaceBank.sol > contracts/SpaceBank_flatten.sol`
 - In `hardhat.config.tf`, define `networks: {hardhat: {forking: {url: ``https://eth-sepolia.g.alchemy.com/v2/${ALCHEMY_API_KEY}``,blockNumber:<X>}}}`  
   Set blockNumber = 5646103, then run `hh node`, `hh console --network localhost` and run below code
